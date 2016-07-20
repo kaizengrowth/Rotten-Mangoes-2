@@ -11,4 +11,6 @@ Rails.application.routes.draw do
     resources :users
   end
 
+  get '/search', :controller => 'movies', :action => 'search', :as => 'search'
+
 end

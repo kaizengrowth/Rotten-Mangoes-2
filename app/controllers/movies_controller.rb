@@ -1,6 +1,9 @@
 class MoviesController < ApplicationController
+
   def index
     @movies = Movie.all
+    @movies = @movies.where("title like ?", "%#{params[:title]}%") unless params[:title].blank?
+    @movies = @movies.where("director like ?", "%#{params[:director]}%") unless params[:director].blank?
   end
 
   def show
