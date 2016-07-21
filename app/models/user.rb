@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
   has_many :reviews
+  before_destroy :send_notification_email
 
   validates :email,
     presence: true
@@ -20,6 +21,10 @@ class User < ActiveRecord::Base
 
   def admin?
     admin
+  end
+
+  def send_notification_email
+    UserMailer.notification_email(@user).deliver
   end
 
 end
